@@ -16,11 +16,11 @@ if (!fs.existsSync(imgSavePath)) {
 //计数器
 let fetched = 0;
 //获取关联文章id
-let syncLast = function(_csrf, op) {
+let getNext = function(_csrf, op) {
   let syncUrl = 'http://www.cnbeta.com/comment/read';
   return new Promise(function(resolve, reject) {
     if (!_csrf || !op) {
-      return reject(`syncLast() param error: _csrf: ${_csrf}, op: ${op}`);
+      return reject(`getNext() param error: _csrf: ${_csrf}, op: ${op}`);
     } else {
       syncUrl += '?_csrf=' + encodeURIComponent(_csrf) + '&op=' + encodeURIComponent(op);
       http.get(syncUrl, function(res) {
@@ -62,7 +62,7 @@ let savedImg = function($, news_title) {
     let img_src = $(this).attr('src');
     let img_filename = news_title + '---' + index + img_src.match(/\.[^.]+$/)[0];
     http.get(img_src, function(res) {
-      var imgData = "";
+      let imgData = "";
       res.setEncoding("binary");
       res.on("data", function(chunk) {
         imgData += chunk;
@@ -116,7 +116,7 @@ let fetchPage = function(x, fullpath) {
         let opStr = html.match(/{SID:[^{}]+}/)[0];
         let op = '1,';
         op += opStr.match(/SID:"([^"]+)"/)[1] + ',' + opStr.match(/SN:"([^"]+)"/)[1];
-        syncLast(_csrf, op).then(function(lastId) {
+        getNext(_csrf, op).then(function(lastId) {
           fetchPage(lastId);
         }).catch(function(error) {
           console.log(error);
