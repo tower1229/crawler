@@ -16,7 +16,7 @@ Nodejs crawler for [cnbeta.com](http://www.cnbeta.com/)
 
 ## 示例
 
-- 例如从该篇文章开始爬取`http://www.cnbeta.com/articles/soft/620873.htm`，修改 `startId="620873"`;
+- 例如从该篇文章开始爬取`http://www.cnbeta.com/articles/tech/620719.htm`，修改 `startId="620719"`;
 - 执行爬取10条：`node app 10`
 
 ![preview](https://raw.githubusercontent.com/tower1229/crawler/master/asset/preview.png)
