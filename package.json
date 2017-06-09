@@ -1,0 +1,15 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "nodejs crawler for Cnbeta.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tower1229@gmail.com",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "request": "^2.81.0"
+  }
+}
