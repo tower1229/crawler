@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs');
 const cheerio = require('cheerio');
-const request = require('request');
 
 const startId = "620719"; //起始ID
 const articalSavePath = "./data"; //文章存放路径
@@ -62,7 +61,20 @@ let savedImg = function($, news_title) {
   $('.article-content img').each(function(index, item) {
     let img_src = $(this).attr('src');
     let img_filename = news_title + '---' + index + img_src.match(/\.[^.]+$/)[0];
-    request(img_src).pipe(fs.createWriteStream(imgSavePath + '/' + img_filename));
+    http.get(img_src, function(res) {
+      var imgData = "";
+      res.setEncoding("binary");
+      res.on("data", function(chunk) {
+        imgData += chunk;
+      });
+      res.on("end", function() {
+        fs.writeFile(imgSavePath + '/' + img_filename, imgData, "binary", function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      });
+    });
   });
 };
 //抓取新闻
