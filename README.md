@@ -1,6 +1,6 @@
 # crawler
 
-Nodejs crawler for [cnbeta.com](http://www.cnbeta.com/)
+Nodejs crawler for [cnbeta.com](http://www.cnbeta.com/), The source code is on [Github](https://github.com/tower1229/crawler).
 
 - 用于爬取并保存cnbeta新闻内容及图片
 - 从起始文章开始爬取，异步获取上一篇文章ID并循环爬取
